@@ -5,6 +5,7 @@ from imageupload_rest.serializers import UploadedImageSerializer
 from imageupload.models import UploadedImage 
 from user_model_customize.models import User
 from django.core.files.base import ContentFile
+from django.http import QueryDict
 
 import base64
 import numpy as np
@@ -22,10 +23,13 @@ class UploadedImagesViewSet(viewsets.ModelViewSet):
         image_string = request.data['base64']
         format, imgstr = image_string.split(';base64,')
         ext = format.split('/')[-1]
-        request.data['image'] = ContentFile(base64.b64decode(imgstr), name='filename.'+ext)
-        request.data['owner'] = User.objects.get(api_key=request.data['api_key']).pk
-        
-        serializer = self.get_serializer(data=request.data)
+        new_req_dict = dict()
+        new_req_dict['image'] = ContentFile(base64.b64decode(imgstr), name='filename.'+ext)
+        new_req_dict['owner'] = User.objects.get(api_key=request.data['api_key']).pk
+        new_req_data = QueryDict('', mutable=True)
+        new_req_data.update(new_req_dict)
+
+        serializer = self.get_serializer(data=new_req_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)

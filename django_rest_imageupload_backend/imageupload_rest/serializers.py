@@ -2,6 +2,10 @@ from rest_framework import serializers
 from imageupload.models import UploadedImage
 
 class UploadedImageSerializer(serializers.ModelSerializer):
+    username = serializers.SerializerMethodField("get_username")
     class Meta:
         model = UploadedImage
-        fields = ('id', 'image', 'owner', 'created_date')  # only serialize the primary key and the image field
+        fields = ('image_id', 'image', 'username', 'created_date')  # only serialize the primary key and the image field
+    
+    def get_username(self, obj):
+        return obj.owner.username

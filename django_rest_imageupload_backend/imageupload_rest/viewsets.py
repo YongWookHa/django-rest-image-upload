@@ -8,8 +8,8 @@ from django.core.files.base import ContentFile
 from django.http import QueryDict
 
 import base64
-import numpy as np
-import cv2
+# import numpy as np
+# import cv2
 
 def decode_image_from_string(image_string) -> 'numpy image':
     nparr = np.frombuffer(base64.decodebytes(image_string.encode('utf8')), np.uint8)

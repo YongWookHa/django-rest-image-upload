@@ -21,10 +21,16 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-
-with open(BASE_DIR/'secret.json', 'r') as f:
-    SECRET_KEY = json.loads(f.read())['SECRET_KEY']  # enter your secret key
+secret_key_json = BASE_DIR / 'secret.json'
+if secret_key_json.exists():
+    with secret_key_json.open('r') as f:
+        SECRET_KEY = json.loads(f.read())['SECRET_KEY']  # enter your secret key
+else:
+    with secret_key_json.open('w') as f:
+        import string, random
+        chars = ''.join([string.ascii_letters, string.digits, string.punctuation]).replace('\'', '').replace('"', '').replace('\\', '')
+        SECRET_KEY = ''.join([random.SystemRandom().choice(chars) for i in range(50)])
+        f.write("{\n"+"\"SECRET_KEY\" : \"{}\"".format(SECRET_KEY)+"\n}")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

@@ -44,4 +44,4 @@ class UploadedImagesViewSet(viewsets.ModelViewSet):
         new_req_dict['owner'] = User.objects.get(api_key=request.data['api_key']).pk
         request.data.update(new_req_dict)
 
-        return self.create(new_req_dict)
+        return self.create(request)

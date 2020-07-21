@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^', include(('imageupload_frontend.urls', 'imageupload_frontend'), namespace='frontend')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(('imageupload_rest.urls', 'imageupload_rest'), namespace='api')),
+    url(r'^api/v1/', include(('imageupload_rest.urls', 'imageupload_rest'), namespace='api')),
 ]
 
 if settings.DEBUG:

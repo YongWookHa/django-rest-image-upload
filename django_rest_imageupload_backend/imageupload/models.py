@@ -4,7 +4,7 @@ import uuid
 
 def scramble_uploaded_filename(instance, filename):
     extension = filename.split(".")[-1]
-    return "{}.{}".format(instance.id, extension)
+    return "{}.{}".format(instance.image_id, extension)
 
 # Create your models here.
 class UploadedImage(models.Model):

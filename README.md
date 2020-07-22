@@ -9,8 +9,17 @@ I added base64 decoding feature because I prefer image transfer with json format
 I hope this would be helpful.
 
 ---
+# Getting Started
 
-# How To Use
+## Blog post written in Korean
+[https://yongwookha.github.io/ETC/2020-07-22-django-rest-api-framework](https://yongwookha.github.io/ETC/2020-07-22-django-rest-api-framework)
+
+## REST-API web browsing sample
+![](https://yongwookha.github.io/img/django-rest-framework.png)
+
+---
+
+# Usage
 
 ## 0. Make a virtual environment
 

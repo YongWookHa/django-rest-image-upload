@@ -9,12 +9,6 @@ from django.core.files.base import ContentFile
 from django.http import QueryDict
 
 import base64
-# import numpy as np
-# import cv2
-
-from ocr_engine.detector import TextDetector
-from ocr_engine.cluster import FeatureExtractor
-from ocr_engine.utils import decode_image_from_string, get_logger
 
 def decode_image_from_string(image_string) -> 'numpy image':
     nparr = np.frombuffer(base64.decodebytes(image_string.encode('utf8')), np.uint8)

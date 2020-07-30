@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 
+@admin.register(User)
 class CustomUserAdmin(UserAdmin):
     # fieldsets : 관리자 리스트 화면에서 출력될 폼 설정 부분
     UserAdmin.fieldsets[1][1]['fields']+=('api_key', )
@@ -13,5 +14,3 @@ class CustomUserAdmin(UserAdmin):
     UserAdmin.add_fieldsets += (
         (('Additional Info'),{'fields':('email','groups', 'user_permissions')}),
     )
-
-admin.site.register(User, CustomUserAdmin)
